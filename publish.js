@@ -234,10 +234,8 @@ function generate(title, subtitle, docs, filename, resolveLinks) {
         subtitle: subtitle,
         docs: docs
     };
-
     outpath = path.join(outdir, filename);
     html = view.render('container.tmpl', docData);
-
     if (resolveLinks) {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
     }
