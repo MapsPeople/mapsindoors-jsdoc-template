@@ -533,7 +533,6 @@ exports.publish = function(taffyData, opts, tutorials) {
     // update outdir if necessary, then create outdir
     packageInfo = ( find({kind: 'package'}) || [] )[0];
     if (packageInfo && packageInfo.name) {
-        outdir = path.join( outdir, packageInfo.name, (packageInfo.version || '') );
         conf.betterDocs.version = packageInfo.version;
         conf.betterDocs.name = `${conf.betterDocs.name} v${packageInfo.version}`;
     }
