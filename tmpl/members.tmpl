@@ -9,6 +9,7 @@ var self = this;
     </span>
 <?js } ?>
 <h4 class="name" id="<?js= id ?>">
+    <?js= self.partial('name-link.tmpl', {id: id}) ?>
     <?js if (data.rawAttribs && data.rawAttribs.length) {?>
         <?js data.rawAttribs.forEach(function(attrib) { ?>
             <span class='tag'><?js= attrib ?></span>
@@ -17,6 +18,9 @@ var self = this;
     <span class="code-name">
         <?js= name ?>
     </span>
+    <?js if (data.optional) { ?>
+        <span class='tag'>Optional</span>
+    <?js }; ?>
 </h4>
 
 <?js if (data.summary) { ?>
@@ -44,5 +48,5 @@ var self = this;
 
 <?js if (data.examples && examples.length) { ?>
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
-    <?js= this.partial('examples.tmpl', examples) ?>
+    <?js= this.partial('examples.tmpl', data) ?>
 <?js } ?>

@@ -20,7 +20,7 @@
 <section>
 
 <header>
-    <?js if (!doc.longname || doc.kind !== 'module') { ?>
+    <?js if ((!doc.longname || doc.kind !== 'module') && !doc.component) { ?>
         <h2><?js if (doc.attribs) { ?><span class="attribs"><?js= doc.attribs ?></span><?js }
             if (doc.ancestors && doc.ancestors.length) { ?>
             <span class="ancestors"><?js= doc.ancestors.join('') ?></span><?js
@@ -38,6 +38,13 @@
                 <div class="class-description"><?js= module.classdesc ?></div>
             <?js } ?>
         <?js }) ?>
+    <?js } else if (doc.component) { ?>
+        <h2>
+            <?js= '&lt' + doc.name + ' ' + doc.component.props.map(p => '<i>' + p.name + '</i>').join(' ') + ' /&gt' ?>
+        </h2>
+        <?js if (doc.classdesc) { ?>
+            <div class="class-description"><?js= doc.classdesc ?></div>
+        <?js } ?>
     <?js } ?>
 </header>
 
@@ -71,11 +78,29 @@
 
         <?js if (doc.examples && doc.examples.length) { ?>
             <h3>Example<?js= doc.examples.length > 1? 's':'' ?></h3>
-            <?js= self.partial('examples.tmpl', doc.examples) ?>
+            <?js= self.partial('examples.tmpl', doc) ?>
         <?js } ?>
     <?js } ?>
     </div>
-
+    <?js if (doc.component) { ?>
+        <?js if (doc.component.slots && doc.component.slots.length) { ?>  
+            <div class='vertical-section'>
+                <h3 class="title"><span>Slots</span></h3>
+                <div class="members">
+                <?js doc.component.slots.forEach(function(slot) { ?>
+                    <div class="member">
+                        <h4 class="name">
+                            <span class="code-name"><?js= slot.name ?></span>
+                        </h4>
+                        <div class="description">
+                            <p><?js= slot.description ?></p>
+                        </div>
+                    </div>
+                <?js }); ?>
+                </div>
+            </div>
+        <?js }; ?>
+    <?js }; ?>
     <?js if (doc.augments && doc.augments.length) { ?>
         <h3 class="subsection-title">Extends</h3>
 
@@ -200,11 +225,16 @@
         var events = self.find({kind: 'event', memberof: isGlobalPage ? {isUndefined: true} : doc.longname});
         if (events && events.length && events.forEach) {
     ?>
-        <h3 class="subsection-title">Events</h3>
-
-        <?js events.forEach(function(e) { ?>
-            <?js= self.partial('method.tmpl', e) ?>
-        <?js }); ?>
+        <div class='vertical-section'>
+            <h3 class="title"><span>Events</span></h3>
+            <div class="members">
+            <?js events.forEach(function(e) { ?>
+                <div class="member">
+                    <?js= self.partial('method.tmpl', e) ?>
+                </div>
+            <?js }); ?>
+            </div>
+        </div>
     <?js } ?>
 </article>
 

@@ -2,16 +2,27 @@
 var data = obj;
 var self = this;
 ?>
+<?js if (kind === 'event' && data.type && data.type.names) {?>
+    <p class="method-parameter is-pulled-right">
+        <label>Type: </label>
+        <?js= self.partial('type.tmpl', data.type.names) ?>
+    </p>
+<?js } ?>
 <?js if (data.kind !== 'module' && !data.hideconstructor) { ?>
     <?js if (data.kind !== 'namespace') { ?>
     <h4 class="name" id="<?js= id ?>">
+        <?js= self.partial('name-link.tmpl', {id: id}) ?>
         <?js if (data.rawAttribs && data.rawAttribs.length) {?>
             <?js data.rawAttribs.forEach(function(attrib) { ?>
                 <span class='tag'><?js= attrib ?></span>
             <?js }); ?>
         <?js } ?>
         <span class="code-name">
-            <?js= (kind === 'class' ? 'new ' : '') + name + (data.signature || '') ?>
+            <?js if (data.component) { ?>
+                <?js= '&lt' + name + ' ' + data.component.props.map(p => '<i>' + p.name + '</i>').join(' ') + ' /&gt' ?>
+            <?js } else { ?>
+                <?js= (kind === 'class' ? 'new ' : '') + name + (data.signature || '') ?>
+            <?js } ?>
         </span>
     </h4>
     <?js } ?>
@@ -47,6 +58,13 @@ var self = this;
         <label>This:</label>
         <?js= this.linkto(data['this'], data['this']) ?>
     </p>
+<?js } ?>
+
+<?js if (data.component) { ?>
+    <?js if (data.component.props && data.component.props.length) { ?>
+        <h5>PropTypes:</h5>
+        <?js= self.partial('proptypes.tmpl', data.component) ?>
+    <?js } ?>
 <?js } ?>
 
 <?js if (data.params && params.length && !data.hideconstructor) { ?>
@@ -156,5 +174,5 @@ var self = this;
 
 <?js if (data.examples && examples.length) { ?>
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
-    <?js= this.partial('examples.tmpl', examples) ?>
+    <?js= this.partial('examples.tmpl', data) ?>
 <?js } ?>
