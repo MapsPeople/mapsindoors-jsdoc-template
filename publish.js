@@ -385,7 +385,7 @@ function buildGroupNav (members, title) {
     nav += buildMemberNav(members.namespaces || [], 'Namespaces', seen, linkto);
     nav += buildMemberNav(members.classes || [], 'Classes', seen, linkto);
     nav += buildMemberNav(members.interfaces || [], 'Interfaces', seen, linkto);
-    nav += buildMemberNav(members.events || [], 'Events', seen, linkto);
+    //nav += buildMemberNav(members.events || [], 'Events', seen, linkto);
     nav += buildMemberNav(members.mixins || [], 'Mixins', seen, linkto);
     nav += buildMemberNav(members.components || [], 'Components', seen, linkto);
     
