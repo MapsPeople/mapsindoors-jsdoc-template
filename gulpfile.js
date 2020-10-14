@@ -13,7 +13,7 @@ const path = require('path')
 const browserSync = require('browser-sync').create();
 
 gulp.task('sass', () => {
-  return gulp.src('styles/app.sass')
+  gulp.src('styles/app.sass')
     .pipe(sass({
       outputStyle: 'compressed',
     }))
@@ -23,7 +23,7 @@ gulp.task('sass', () => {
 })
 
 gulp.task('js', () => {
-  return gulp.src(path.join('scripts/', '*.js'), { base: 'app' })
+  gulp.src(path.join('scripts/', '*.js'), { base: 'app' })
     .pipe(concat('app.js'))
     .pipe(babel({
       presets: ['@babel/env'],
@@ -33,32 +33,32 @@ gulp.task('js', () => {
     .pipe(gulp.dest('static/scripts'))
 })
 
-gulp.task('docs', function(done) {
-  return run(`cd .. && ${DOCS_COMMAND}`).exec({callback: done})
+gulp.task('docs', function() {
+  return run(`cd .. && ${DOCS_COMMAND}`).exec()
 })
 
-gulp.task('watch', (done) => {
+gulp.task('watch', () => {
   gulp.watch('styles/**/*.sass', ['sass', 'docs'])
   gulp.watch('scripts/**/*.js', ['js', 'docs'])
   gulp.watch('tmpl/**/*.tmpl', ['docs'])
   gulp.watch('publish.js', ['docs'])
   if (process.env.DOCS) {
-    console.log(process.env.DOCS.split(','))
-    gulp.watch(process.env.DOCS.split(','), ['docs'])
+    const array = [
+      ...process.env.DOCS.split(','),
+      ...process.env.DOCS.split(',').map(src => '!' + src.replace('**/*', 'node_modules/**/*'))
+    ]
+    console.log(array)
+    gulp.watch(array, ['docs'])
   }
-  done();
 })
 
-gulp.task('sync', (done) => {
+gulp.task('sync', () => {
   browserSync.init({
     server: {
       baseDir: DOCS_OUTPUT
     }
   })
-  gulp.watch(`${DOCS_OUTPUT}/*`).on('change', browserSync.reload);
-  done();
+  gulp.watch(`${DOCS_OUTPUT}/*`).on('change', browserSync.reload)
 })
 
-gulp.task('build', gulp.series('sass', 'js'));
-
-gulp.task('default', gulp.series('sass', 'js', 'docs', 'watch', 'sync'));
+gulp.task('default', ['sass', 'js', 'docs', 'watch', 'sync'])
