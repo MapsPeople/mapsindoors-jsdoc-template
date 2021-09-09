@@ -46,13 +46,6 @@ var self = this;
     </div>
 <?js } ?>
 
-<?js if (kind === 'event' && data.type && data.type.names) {?>
-    <p class="method-parameter">
-    <label>Type: </label>
-        <?js= this.partial('type.tmpl', data.type.names) ?>
-    </p>
-<?js } ?>
-
 <?js if (data['this']) { ?>
     <p class="method-parameter">
         <label>This:</label>

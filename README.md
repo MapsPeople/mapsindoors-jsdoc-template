@@ -92,7 +92,7 @@ It performs 4 operations:
 * First of all it transpiles all .ts and .tsx files to .js, so that all comments used by you are treated
 as a regular JSDoc comments.
 
-Furhtermore it:
+Furthermore it:
 
 * Converts all your commented `type` aliases to `@typedef`
 * Converts all your commented `interface` definitions to `@interface`,
@@ -181,7 +181,7 @@ export default interface ActionJSON {
   showFilter: boolean;
   /**
    * Action component. When set to false action will be invoked immediately after clicking it,
-   * to put in another words: tere wont be an action view
+   * to put in another words: there wont be an action view
    */
   component?: string | false | null;
 }
@@ -217,7 +217,7 @@ class ClassName {
 
 # @category plugin
 
-better-docs also allows you to nest your documentation into categories in the sidebar menu.
+better-docs also allows you to nest your documentation into categories and subcategories in the sidebar menu.
 
 ## Usage
 
@@ -234,12 +234,13 @@ To add a plugin - update `plugins` section in your `jsdoc.json` file:
 ...
 ```
 
-and then you can use `@category` tag in your code:
+and then you can use `@category` and/or `@subcategory` tag in your code:
 
 ```
 /**
  * Class description
  * @category Category
+ * @subcategory All
  */
 class YourClass {
   ....
@@ -403,7 +404,7 @@ You can put as many `@example` tags as you like in one component and "caption" e
 
 ## Mixing components in preview
 
-Also you can use multiple components which are documented with `@component` tag together. So lets say you have 2 components and in the seccond component you want to use the first one as a wrapper like this:
+Also you can use multiple components which are documented with `@component` tag together. So lets say you have 2 components and in the second component you want to use the first one as a wrapper like this:
 
 ```javascript
 // component-1.js
@@ -549,7 +550,9 @@ So let's say you want to add `babel-polyfill` and 'bulma.css' framework to your 
 
 First of all, let me state that better-docs extends the `default` template. That is why default template parameters are also handled.
 
-To customize the better-docs pass `options` to `templates['better-docs']`. section in your `jsdoc confuguration file`.
+[BETA]: You must explicitly set the `search` option of the `default` template to `true` to enable search
+
+To customize the better-docs pass `options` to `templates['better-docs']`. section in your `jsdoc configuration file`.
 
 Example configuration file with settings for both `default` and `better-docs` templates:
 
@@ -580,6 +583,7 @@ Example configuration file with settings for both `default` and `better-docs` te
     "templates": {
         "cleverLinks": false,
         "monospaceLinks": false,
+        "search": true,
         "default": {
             "staticFiles": {
               "include": [
@@ -590,10 +594,11 @@ Example configuration file with settings for both `default` and `better-docs` te
         "better-docs": {
             "name": "AdminBro Documentation",
             "logo": "images/logo.png",
+            "title": "", // HTML title
             "css": "style.css",
             "trackingCode": "tracking-code-which-will-go-to-the-HEAD",
 	    "hideGenerator": false,
-            "navigation": [
+            "navLinks": [
                 {
                     "label": "Github",
                     "href": "https://github.com/SoftwareBrothers/admin-bro"
@@ -606,6 +611,24 @@ Example configuration file with settings for both `default` and `better-docs` te
         }
     }
 }
+```
+
+## Extras
+
+### typedef(import(...))
+
+better-docs also has one extra plugin for handling typescript'like types imports like (it has to be one-liner):
+
+```
+/** @typedef {import('./some-other-file').ExportedType} ExportedType */
+```
+
+It simply removes that from the code so JSDoc wont throw an error. In order to use it add this plugin to your plugins section:
+
+```
+  "plugins": [
+        "node_modules/better-docs/typedef-import"
+    ],
 ```
 
 # Setting up for the development
@@ -668,7 +691,7 @@ better-docs is Copyright © 2019 SoftwareBrothers.co. It is free software and ma
 <img src="https://softwarebrothers.co/assets/images/software-brothers-logo-full.svg" width=240>
 
 
-We’re an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
+We're an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
 
 * We are available for [hire](https://softwarebrothers.co/contact).
 * If you want to work for us - check out the [career page](https://softwarebrothers.co/career).
