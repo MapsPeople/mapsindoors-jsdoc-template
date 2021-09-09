@@ -1,5 +1,10 @@
 .sidebar
   padding-bottom: 120px
+
+  .search-wrapper
+    margin-bottom: rem(20px)
+    input
+      border-radius: 0
   a
     color: $grey
     overflow-wrap: break-word
@@ -8,12 +13,14 @@
   h3
     margin: rem(24px) 0 rem(6px)
     color: $main-nav
-    font-size: 12px
+    font-size: 14px
     text-transform: uppercase
   ul
     padding: 0 0 rem(4px) rem(16px)
     li
-      padding: rem(3px) 0
+      padding: rem(2px) 0
+  li > ul
+    padding: 0 0 0px 25px
 
   .category
     h2
@@ -22,16 +29,16 @@
       margin-top: 40px
 
 #sidebarNav.sticky
-  right: 0
-  transition: right 0.5s
+  left: 0
+  transition: left 0.5s
 
 #sidebarNav
   @include until($desktop)
     z-index: 100
     top: 0
-    right: -300px
+    left: -300px
     position: fixed
-    transition: right 0.5s
+    transition: left 0.5s
     padding: 28px
     width: 300px
     bottom: 0
