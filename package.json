@@ -1,8 +1,8 @@
 {
-  "name": "better-docs",
-  "version": "2.3.2",
+  "name": "mapsindoors-jsdoc-template",
+  "version": "2.4.0",
   "description": "JSdoc theme",
-  "repository": "github:SoftwareBrothers/better-docs",
+  "repository": "github:MapsPeople/mapsindoors-jsdoc-template",
   "main": "publish.js",
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
