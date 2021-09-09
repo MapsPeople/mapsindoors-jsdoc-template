@@ -17,11 +17,12 @@
         "destination": "docs/",
         "recurse": true,
         "verbose": true,
-        "template": "./"
+        "template": "./",
+        "tutorials": "./fixtures/tutorials"
     },
     "templates": {
         "better-docs": {
-            "name": "AdminBro Documentation",
+            "name": "MapsIndoors",
             "logo": "images/logo.png"
         }
     }
