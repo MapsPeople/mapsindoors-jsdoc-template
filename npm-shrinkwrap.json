@@ -1,12 +1,12 @@
 {
   "name": "mapsindoors-jsdoc-template",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "mapsindoors-jsdoc-template",
-      "version": "2.4.3",
+      "version": "2.4.4",
       "license": "MIT",
       "dependencies": {
         "brace": "^0.11.1",
