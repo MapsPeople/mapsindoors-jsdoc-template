@@ -589,7 +589,6 @@ exports.publish = function (taffyData, opts, tutorials) {
     if (packageInfo && packageInfo.name) {
         conf.betterDocs.version = packageInfo.version;
         conf.betterDocs.name = `${conf.betterDocs.name} v${packageInfo.version}`;
-        outdir = path.join(outdir, packageInfo.name, (packageInfo.version || ''))
     }
     fs.mkPath(outdir)
 
