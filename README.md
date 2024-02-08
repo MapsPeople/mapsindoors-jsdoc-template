@@ -442,7 +442,7 @@ _(To read more about passing options - scroll down to __Customization__ section)
     "opts": {...},
     "templates": {
         "better-docs": {
-            "name": "AdminBro Documentation",
+            "name": "Sample Documentation",
             "component": {
               "wrapper": "./path/to/your/wrapper-component.js",
             },
@@ -533,7 +533,7 @@ So let's say you want to add `babel-polyfill` and 'bulma.css' framework to your 
     "opts": {...},
     "templates": {
         "better-docs": {
-            "name": "AdminBro Documentation",
+            "name": "Sample Documentation",
             "component": {
                 "entry": [
                     "import 'babel-polyfill';",
@@ -592,7 +592,7 @@ Example configuration file with settings for both `default` and `better-docs` te
             }
         },
         "better-docs": {
-            "name": "AdminBro Documentation",
+            "name": "Sample Documentation",
             "logo": "images/logo.png",
             "title": "", // HTML title
             "css": "style.css",
@@ -605,7 +605,7 @@ Example configuration file with settings for both `default` and `better-docs` te
                 },
                 {
                     "label": "Example Application",
-                    "href": "https://admin-bro-example-app.herokuapp.com/admin"
+                    "href": "https://admin-bro-example-app-staging.herokuapp.com/admin"
                 }
             ]
         }
@@ -662,7 +662,7 @@ yarn
 
 3. Within the better-docs folder run the gulp script. It will regenerate documentation every time you change something.
 
-It supports following EVN variables:
+It supports following ENV variables:
 
 * `DOCS_COMMAND` - a command in your root repo which you use to generate documentation: i.e. `DOCS_COMMAND='jsdoc -c jsdoc.json'` or `npm run docs` if you have `docs` command defined in `package.json` file
 * `DOCS_OUTPUT` - where your documentation is generated. It should point to the same folder your jsdoc `--destination` conf. But make sure that it is relative to the path where you cloned `better-docs`.
