@@ -8,9 +8,9 @@ const REACT_PATH = path.join(__dirname, 'fixtures/component.jsx')
 
 describe('@component', function () {
   describe('.parseVue', function () {
-    beforeEach(function () {
+    beforeEach(async function () {
       this.doclet = {}
-      this.output = parseVue(VUE_PATH, this.doclet)
+      this.output = await parseVue(VUE_PATH, this.doclet)
     })
 
     it('returns displayName', function () {

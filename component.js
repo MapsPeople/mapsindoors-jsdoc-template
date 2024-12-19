@@ -83,8 +83,8 @@ var parseReact = function (filePath, doclet) {
   }
 }
 
-var parseVue = function (filePath, doclet) {
-  const docGen = vueDocs.parse(filePath)
+var parseVue = async function (filePath, doclet) {
+  const docGen = await vueDocs.parse(filePath)
   doclet.name = doclet.longname = docGen.displayName
   return {
     displayName: docGen.displayName,
@@ -98,10 +98,7 @@ var parseVue = function (filePath, doclet) {
         ? (prop.defaultValue.func ? 'function()' : prop.defaultValue.value)
         : undefined
     })),
-    slots: Object.keys(docGen.slots || {}).map(key => ({
-      name: key,
-      description: docGen.slots[key].description,
-    }))
+    slots: docGen?.slots
   }
 }
 
