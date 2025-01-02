@@ -57,7 +57,8 @@
     "jsdoc": "^4.0.4",
     "mocha": "^11.0.1",
     "sass": "^1.48.0",
-    "semantic-release": "^24.2.0"
+    "semantic-release": "^24.2.0",
+    "semver": "^7.6.3"
   },
   "husky": {
     "hooks": {

@@ -8,6 +8,8 @@ var logger = require('jsdoc/util/logger')
 var path = require('jsdoc/path')
 var taffy = require('@jsdoc/salty').taffy
 var template = require('jsdoc/template')
+const semver = require('semver');
+
 var util = require('util')
 const { getParser } = require('jsdoc/util/markdown')
 
@@ -589,6 +591,12 @@ exports.publish = function (taffyData, opts, tutorials) {
     if (packageInfo && packageInfo.name) {
         conf.betterDocs.version = packageInfo.version;
         conf.betterDocs.name = `${conf.betterDocs.name} v${packageInfo.version}`;
+    
+        conf.baseUrl = conf.betterDocs.releaseUrl
+    
+        if(semver.prerelease(packageInfo.version)) {
+            conf.baseUrl = conf.betterDocs.preReleaseUrl
+        }
     }
     fs.mkPath(outdir)
 
