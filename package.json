@@ -34,7 +34,7 @@
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.16.7",
     "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-conventional": "^19.6.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@semantic-release/git": "^10.0.1",
     "@vue/component-compiler-utils": "^3.3.0",
     "browser-sync": "^3.0.3",
