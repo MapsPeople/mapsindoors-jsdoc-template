@@ -9,7 +9,9 @@ const baseUrl = env?.conf?.templates?.baseUrl;
 
 <?js if (data.kind === 'package') { ?>
     <h3><?js= betterDocs.name ?></h3>
-    <pre class="prettyprint"><code class="language-html">&lt;script src="<?js= baseUrl ?><?js=data.version?>/mapsindoors-<?js=data.version?>.js.gz" integrity="<?js=betterDocs.integrity?>" crossorigin="anonymous"&gt;&lt;/script&gt;</code></pre>
+    <?js if(baseUrl > '') { ?>
+        <pre class="prettyprint"><code class="language-html">&lt;script src="<?js= baseUrl ?><?js=data.version?>/mapsindoors-<?js=data.version?>.js.gz" integrity="<?js=betterDocs.integrity?>" crossorigin="anonymous"&gt;&lt;/script&gt;</code></pre>
+    <?js } ?>
 <?js } ?>
 
 <?js if (data.readme) { ?>
